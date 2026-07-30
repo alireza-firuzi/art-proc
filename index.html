@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative Thread Studio | Maryam Firuzi Style AI</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@200;300;400;500;600&family=Vazirmatn:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="dark-mode">
+    <div id="app">
+        <!-- Sidebar Navigation & Studio Title -->
+        <header id="studio-header">
+            <div class="header-brand">
+                <span class="artist-tag">ART FAIR COLLABORATION PROTOTYPE</span>
+                <h1>Generative Thread Studio</h1>
+                <p class="subtitle">Based on Maryam Firuzi's <em>Women in Mirrors</em> Photography & Baluchi Embroidery Motifs</p>
+            </div>
+            <div class="header-actions">
+                <button id="btn-export-pipeline" class="btn btn-outline">Export AI Pipeline Config</button>
+                <button id="btn-download" class="btn btn-primary" disabled>Download Fine-Art Canvas</button>
+            </div>
+        </header>
+
+        <main id="studio-workspace">
+            <!-- Left Panel: Controls & AI Parameters -->
+            <aside id="controls-panel">
+                <section class="control-group">
+                    <h3>1. Input Image</h3>
+                    <div class="dropzone" id="image-dropzone">
+                        <input type="file" id="file-input" accept="image/*" class="file-hidden">
+                        <div class="dropzone-content">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            <p>Upload Photo or Drag & Drop</p>
+                            <span class="subtext">Portraits, reflections, or landscapes</span>
+                        </div>
+                    </div>
+                    <div class="sample-images">
+                        <span>Or try sample studio poses:</span>
+                        <div class="sample-buttons">
+                            <button class="sample-btn" data-sample="sample1">Mirror Portrait</button>
+                            <button class="sample-btn" data-sample="sample2">Desert Landscape</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="control-group">
+                    <h3>2. Photography Style Transfer</h3>
+                    <div class="slider-control">
+                        <label for="slider-warmth">Iranian Earth Tone Warmth: <span id="val-warmth">85%</span></label>
+                        <input type="range" id="slider-warmth" min="0" max="100" value="85">
+                    </div>
+                    <div class="slider-control">
+                        <label for="slider-contrast">Cinematic Shadow Contrast: <span id="val-contrast">75%</span></label>
+                        <input type="range" id="slider-contrast" min="0" max="100" value="75">
+                    </div>
+                    <div class="checkbox-control">
+                        <input type="checkbox" id="chk-mirror-frame" checked>
+                        <label for="chk-mirror-frame">Synthesize Vintage Brass Mirror Frame</label>
+                    </div>
+                </section>
+
+                <section class="control-group">
+                    <h3>3. Generative Embroidery Thread Model</h3>
+                    <div class="slider-control">
+                        <label for="slider-stitch-density">Stitch Density (Threads/px): <span id="val-density">65</span></label>
+                        <input type="range" id="slider-stitch-density" min="10" max="150" value="65">
+                    </div>
+                    <div class="slider-control">
+                        <label for="slider-thread-thickness">Silk Thread Thickness: <span id="val-thickness">2.5px</span></label>
+                        <input type="range" id="slider-thread-thickness" min="1" max="6" value="2.5" step="0.5">
+                    </div>
+
+                    <div class="color-palette-picker">
+                        <label>Baluchi Needlework Palette:</label>
+                        <div class="palette-options">
+                            <button class="palette-btn active" data-palette="baluchi">
+                                <span class="swatch" style="background:#b82635"></span>
+                                <span class="swatch" style="background:#e5ad35"></span>
+                                <span class="swatch" style="background:#1d6b75"></span>
+                                <span class="swatch" style="background:#d65b82"></span>
+                                Baluchi Traditional
+                            </button>
+                            <button class="palette-btn" data-palette="gold_silk">
+                                <span class="swatch" style="background:#d4af37"></span>
+                                <span class="swatch" style="background:#f3e5ab"></span>
+                                <span class="swatch" style="background:#996515"></span>
+                                Gold Silk
+                            </button>
+                            <button class="palette-btn" data-palette="desert_monochrome">
+                                <span class="swatch" style="background:#ffffff"></span>
+                                <span class="swatch" style="background:#c2a68c"></span>
+                                <span class="swatch" style="background:#4a3b32"></span>
+                                Desert Monochrome
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="control-group">
+                    <button id="btn-generate" class="btn btn-accent full-width">Generate Thread Artwork</button>
+                </section>
+            </aside>
+
+            <!-- Center/Right Viewport: Canvas & Comparison -->
+            <section id="viewport-panel">
+                <div class="viewport-header">
+                    <div class="view-mode-tabs">
+                        <button class="tab-btn active" data-tab="split">Dual View (Original / Styled)</button>
+                        <button class="tab-btn" data-tab="canvas">Final Generative Canvas</button>
+                    </div>
+                    <div class="status-indicator">
+                        <span class="status-dot green"></span>
+                        <span id="status-text">Generative Engine Ready</span>
+                    </div>
+                </div>
+
+                <div class="canvas-container">
+                    <div id="split-view-wrapper" class="split-view">
+                        <div class="viewport-box">
+                            <span class="box-label">Original Photo Input</span>
+                            <img id="img-original" src="" alt="Upload a photo" class="hidden">
+                            <div id="placeholder-original" class="canvas-placeholder">
+                                <p>Upload an input photo to begin</p>
+                            </div>
+                        </div>
+                        <div class="viewport-box">
+                            <span class="box-label">Generative Thread Output</span>
+                            <canvas id="output-canvas"></canvas>
+                            <div id="placeholder-output" class="canvas-placeholder">
+                                <p>Output artwork canvas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for Exporting AI Pipeline Config -->
+    <div id="modal-export" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Python PyTorch & Diffusers Training Pipeline Config</h2>
+                <button id="btn-close-modal" class="btn-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Below is the automatically generated Python dataset & model configuration script to fine-tune an SDXL / FLUX.1 LoRA for Maryam Firuzi's photography and thread motifs on your GPU:</p>
+                <pre><code id="code-export"></code></pre>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-copy-code" class="btn btn-primary">Copy Python Script</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

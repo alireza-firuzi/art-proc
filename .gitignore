@@ -1,0 +1,22 @@
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+*.safetensors
+*.ckpt
+*.bin
+
+# Node & Build
+node_modules/
+dist/
+.env
+
+# Logs
+*.log
+.system_generated/
